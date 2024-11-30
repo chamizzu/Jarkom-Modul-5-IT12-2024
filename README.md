@@ -1,5 +1,13 @@
 # Jarkom-Modul-5-IT12-2024
 
+## Kelompok IT12
+### Anggota Kelompok :
+|             Nama              |     NRP    |
+|-------------------------------|------------|
+| Azza Farichi Tjahjono         | 5027231071 |
+| Aisyah Rahmasari              | 5027231072 |
+
+
 ## TOPOLOGI
 
 ![image](https://github.com/user-attachments/assets/cb3d6cc1-3252-4796-95c8-6a291f7383d3)
@@ -9,7 +17,7 @@
 
 ## Konfigurasi Network
 
-###NewEridu
+### NewEridu
 
 ```
 auto eth0
@@ -49,7 +57,7 @@ post-up route add -net 192.239.0.0 netmask 255.255.255.0 gw 192.239.1.222
 post-up route add -net 192.239.1.0 netmask 255.255.255.128 gw 192.239.1.222
 ```
 
-###SixStreet
+### SixStreet
 
 ```
 #A1
@@ -89,7 +97,7 @@ post-up route add -net 192.239.1.224 netmask 255.255.255.252 gw 192.239.1.210
 post -up route add -net 192.239.1.128 netmask 255.255.255.192 gw 192.239.1.211
 ```
 
-###HDD ( DNS )
+### HDD ( DNS )
 
 ```
 #A6
@@ -102,7 +110,7 @@ iface eth0 inet static
 up echo nameserver 192.168.122.1 > /etc/resolv.conf
 ```
 
-###FAIRY ( DHCP )
+### FAIRY ( DHCP )
 
 ```
 #A6
@@ -115,7 +123,7 @@ iface eth0 inet static
 up echo nameserver 192.168.122.1 > /etc/resolv.conf
 ```
 
-###ScootOutpost
+### ScootOutpost
 
 ```
 #A7
@@ -137,7 +145,7 @@ up echo nameserver 192.168.122.1 > /etc/resolv.conf
 post-up route add -net 192.239.1.216 netmask 255.255.255.252 gw 192.239.1.209
 ```
 
-###HollowZero
+### HollowZero
 
 ```
 #A8
@@ -153,7 +161,7 @@ echo 'nameserver 192.168.122.1' > /etc/resolv.conf
 #post-up route add -net 192.239.1.216 netmask 255.255.255.252 gw 192.239.1.209
 ```
 
-###OuterRing (DHCP Relay)
+### OuterRing (DHCP Relay)
 
 ```
 #A7
@@ -175,7 +183,7 @@ up echo nameserver 192.168.122.1 > /etc/resolv.conf
 route add -net 192.239.1.216 netmask 255.255.255.252 gw 192.239.1.209
 ```
 
-###Burnice (Client)
+### Burnice (Client)
 
 ```
 #A9
@@ -183,7 +191,7 @@ auto eth0
 iface eth0 inet dhcp
 ```
 
-###Caesar ( Client )
+### Caesar ( Client )
 
 ```
 #A9
@@ -191,7 +199,7 @@ auto eth0
 iface eth0 inet dhcp
 ```
 
-###LuminaSquare ( DHCP Relay )
+### LuminaSquare ( DHCP Relay )
 
 ```
 #A2
@@ -219,7 +227,7 @@ up echo nameserver 192.168.122.1 > /etc/resolv.conf
 post-up route add -net 192.239.1.0 netmask 255.255.255.128 gw 192.239.1.195
 ```
 
-###Jane( Client )
+### Jane( Client )
 
 ```
 #A3
@@ -227,7 +235,7 @@ auto eth0
 iface eth0 inet dhcp
 ```
 
-#Policeboo (Client)
+### Policeboo (Client)
 
 ```
 #A3
@@ -235,7 +243,7 @@ auto eth0
 iface eth0 inet dhcp
 ```
 
-###HIA (Web Server)
+### HIA (Web Server)
 
 ```
 #A4
@@ -251,7 +259,7 @@ up echo nameserver 192.168.122.1 > /etc/resolv.conf
 post-up route add -net 192.239.1.220 netmask 255.255.255.252 gw 192.239.1.193
 ```
 
-###BalletTwins
+### BalletTwins
 
 ```
 #A4
@@ -273,7 +281,7 @@ up echo nameserver 192.168.122.1 > /etc/resolv.conf
 post-up route add -net 192.239.1.220 netmask 255.255.255.252 gw 192.239.1.193
 ```
 
-###Lycaon
+### Lycaon
 
 ```
 #A5
@@ -281,7 +289,7 @@ auto eth0
 iface eth0 inet dhcp
 ```
 
-###Ellen
+### Ellen
 
 ```
 #A5
