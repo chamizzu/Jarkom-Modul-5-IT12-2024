@@ -306,3 +306,148 @@ iface eth0 inet dhcp
 auto eth0
 iface eth0 inet dhcp
 ```
+
+
+## SETUP
+
+### NewEridu
+
+- setup.sh
+
+```
+echo net.ipv4.ip_forward=1 >/etc/sysctl.conf
+sysctl -p
+
+ETH0_IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP
+```
+
+### OuterRing
+
+- isc-dhcp-relay
+
+```
+# Defaults for isc-dhcp-relay initscript
+# sourced by /etc/init.d/isc-dhcp-relay
+# installed at /etc/default/isc-dhcp-relay by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# What servers should the DHCP relay forward requests to?
+SERVERS="192.239.1.202"
+
+# On what interfaces should the DHCP relay (dhrelay) serve DHCP requests?
+INTERFACES="eth0 eth1 eth2 eth3"
+
+# Additional options that are passed to the DHCP relay daemon?
+OPTIONS=""
+```
+
+- setup.sh
+
+```
+echo net.ipv4.ip_forward=1 >/etc/sysctl.conf
+sysctl -p
+
+export DEBIAN_FRONTEND=noninteractive
+apt update
+apt install isc-dhcp-relay netcat -y
+cp ~/isc-dhcp-relay /etc/default/isc-dhcp-relay
+
+service isc-dhcp-relay start
+service rsyslog start
+```
+
+### SixStreet
+
+- isc-dhcp-relay
+
+```
+# Defaults for isc-dhcp-relay initscript
+# sourced by /etc/init.d/isc-dhcp-relay
+# installed at /etc/default/isc-dhcp-relay by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# What servers should the DHCP relay forward requests to?
+SERVERS="192.239.1.202"
+
+# On what interfaces should the DHCP relay (dhrelay) serve DHCP requests?
+INTERFACES="eth0 eth1 eth2 eth3"
+
+# Additional options that are passed to the DHCP relay daemon?
+OPTIONS=""
+```
+
+- setup.sh
+
+```
+echo net.ipv4.ip_forward=1 >/etc/sysctl.conf
+sysctl -p
+
+export DEBIAN_FRONTEND=noninteractive
+apt update
+apt install isc-dhcp-relay netcat -y
+cp ~/isc-dhcp-relay /etc/default/isc-dhcp-relay
+
+service isc-dhcp-relay start
+service rsyslog start
+```
+
+### Fairy
+
+- setup.sh
+
+```
+export DEBIAN_FRONTEND=noninteractive
+apt update
+apt install isc-dhcp-server netcat -y
+cp ~/dhcpd.conf /etc/dhcp/dhcpd.conf
+cp ~/isc-dhcp-server /etc/default/isc-dhcp-server
+echo INTERFACESv4=\"eth0\" >/etc/default/isc-dhcp-server
+service rsyslog start
+
+service isc-dhcp-server start
+#iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
+```
+
+- dhcpd.conf
+
+```
+#A9
+subnet 192.239.1.128 netmask 255.255.255.192 {
+  range 192.239.1.130 192.239.1.189;
+  option routers 192.239.1.129;
+  option broadcast-address 192.239.1.190;
+  option domain-name-servers 192.239.1.203;
+  default-lease-time 600;
+  max-lease-time 7200;
+}
+
+#A5
+subnet 192.239.1.0 netmask 255.255.255.128 {
+  range 192.239.1.2 192.239.1.126;
+  option routers 192.239.1.1;
+  option broadcast-address 192.239.1.126;
+  option domain-name-servers 192.239.1.203;
+  default-lease-time 600;
+  max-lease-time 7200;
+}
+
+#A3
+subnet 192.239.0.0 netmask 255.255.255.0 {
+  range 192.239.0.2 192.239.0.253;
+  option routers 192.239.0.1;
+  option broadcast-address 192.239.0.254;
+  option domain-name-servers 192.239.1.203;
+  default-lease-time 600;
+  max-lease-time 7200;
+}
+
+#A6
+subnet 192.239.1.200 netmask 255.255.255.248 {}
+```
