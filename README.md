@@ -480,3 +480,37 @@ subnet 192.239.1.200 netmask 255.255.255.248 {}
 
 ![image](https://github.com/user-attachments/assets/f3956413-2f52-4968-bdb2-995f4eb772ff)
 
+## MISI 2
+
+1. Agar jaringan di New Eridu bisa terhubung ke luar (internet), kalian perlu mengkonfigurasi routing menggunakan iptables. Namun, kalian tidak diperbolehkan menggunakan MASQUERADE
+
+- Pada NewEridu tambahkan :
+
+```
+ETH0_IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP
+```
+
+- lalu coba untuk ping google.com di node yang kamu mau ( bebas )
+
+![image](https://github.com/user-attachments/assets/16fe2b4d-6681-4c36-a915-85f319266eb5)
+
+![image](https://github.com/user-attachments/assets/05dbda6d-e113-400f-b580-197fa4708917)
+
+![image](https://github.com/user-attachments/assets/613b4861-7eb7-4766-897f-fdb714c850ee)
+
+2.  Karena Fairy adalah Al yang sangat berharga, kalian perlu memastikan bahwa tidak ada perangkat lain yang bisa melakukan ping ke Fairy. Tapi Fairy tetap dapat mengakses seluruh perangkat.
+
+- Gunakan 'iptables -L INPUT -n --line-numbers' untuk menampilkan daftar aturan firewall yang sedang aktif di chain INPUT, lengkap dengan nomor urutnya dan bisa kita lihat di gambar ini bahwa masih kosong dan belum ada apa ap
+
+![image](https://github.com/user-attachments/assets/9ad451ec-6972-4f62-815b-5c7c7a0491dd)
+
+- Selanjutnya jalankan command berikut ini 'iptables -A INPUT -p icmp --icmp-type echo-request -j DROP' guna untuk menambahkan aturan untuk memblokir permintaan ping (echo-request) ke komputer FAIRY.
+
+![image](https://github.com/user-attachments/assets/09dfc445-3c1f-4e68-b04e-01ae1f8272ca)
+
+- Selanjutnya, lakukan pengujian ping dua arah antara DHCP SERVER (FAIRY) dan satu node lain yang dipilih secara bebas. Disini saya akan ping ke node ScootOutpost
+
+![image](https://github.com/user-attachments/assets/0f7604fd-1194-4284-890a-e1accb691087)
+
+3.  
