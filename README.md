@@ -15,6 +15,10 @@
 ## Pembagian IP
 ![image](https://github.com/user-attachments/assets/892e3e0a-4174-46ec-9556-16543bec12b7)
 
+## TREE
+
+![vlsm-tree-modul-5-it12 drawio](https://github.com/user-attachments/assets/0ac8303b-643a-4751-9608-95c052f20165)
+
 ## Konfigurasi Network
 
 ### NewEridu
@@ -81,15 +85,6 @@ iface eth2 inet static
 
 up echo nameserver 192.168.122.1 > /etc/resolv.conf
 
-#A4
-#route add -net 192.239.1.192 netmask 255.255.255.248 gw 192.239.1.218
-
-#A5
-#route add -net 192.239.1.0 netmask 255.255.255.128 gw 192.239.1.218
-
-#A3
-#route add -net 192.239.0.0 netmask 255.255.255.0 gw 192.239.1.218
-
 #A8
 post-up route add -net 192.239.1.224 netmask 255.255.255.252 gw 192.239.1.210
 
@@ -143,6 +138,9 @@ up echo nameserver 192.168.122.1 > /etc/resolv.conf
 
 #A1
 post-up route add -net 192.239.1.216 netmask 255.255.255.252 gw 192.239.1.209
+
+#A9
+post-up route add -net 192.239.1.128 netmask 255.255.255.192 gw 192.239.1.211
 ```
 
 ### HollowZero
@@ -180,7 +178,10 @@ iface eth1 inet static
 up echo nameserver 192.168.122.1 > /etc/resolv.conf
 
 #A1
-route add -net 192.239.1.216 netmask 255.255.255.252 gw 192.239.1.209
+post-up route add -net 192.239.1.216 netmask 255.255.255.252 gw 192.239.1.209
+
+#A5
+post-up route add -net 192.239.1.0 netmask 255.255.255.128 gw 192.239.1.195
 ```
 
 ### Burnice (Client)
@@ -279,6 +280,15 @@ up echo nameserver 192.168.122.1 > /etc/resolv.conf
 
 #A2
 post-up route add -net 192.239.1.220 netmask 255.255.255.252 gw 192.239.1.193
+
+#A1
+post-up route add -net 192.239.1.216 netmask 255.255.255.252 gw 192.239.1.193
+
+#A6
+post-up route add -net 192.239.1.200 netmask 255.255.255.248 gw 192.239.1.193
+
+#A9
+post-up route add -net 192.239.1.128 netmask 255.255.255.192 gw 192.239.1.218
 ```
 
 ### Lycaon
