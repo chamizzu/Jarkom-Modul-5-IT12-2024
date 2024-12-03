@@ -475,3 +475,8 @@ subnet 192.239.1.200 netmask 255.255.255.248 {}
 4. Coba Restart dan matikan node client lalu hidupkan kembali, lihat apakah DHCP berhasil
 
 ![image](https://github.com/user-attachments/assets/5bcee64c-26c5-4886-bec5-4a518fa0884a)
+
+5. Untuk mengecek kepastian bahwa log ip 192.239.1.211 berhasil di lease ke Caesar, kita bisa membuka web console Fairy lalu jalankan 'tail -f /var/log/syslog'
+
+![image](https://github.com/user-attachments/assets/f3956413-2f52-4968-bdb2-995f4eb772ff)
+
