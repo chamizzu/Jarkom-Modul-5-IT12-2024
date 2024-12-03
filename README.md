@@ -451,3 +451,27 @@ subnet 192.239.0.0 netmask 255.255.255.0 {
 #A6
 subnet 192.239.1.200 netmask 255.255.255.248 {}
 ```
+
+## PENGERJAAN
+
+1. Jalankan 'bash setup.sh' di NewEridu
+
+![Screenshot 2024-12-01 043343](https://github.com/user-attachments/assets/ba70cadf-1a43-4906-b9b8-62e15a3fa993)
+
+2. Lakukan hal yang sama pada DHCP SERVER ( fairy ) dan DHCP RELAY ( OuterRing & SixStreet )
+
+![Screenshot 2024-12-01 054755](https://github.com/user-attachments/assets/6ea8c32b-9dce-44d6-80b4-6b87978a8e83)
+
+![Screenshot 2024-12-01 055530](https://github.com/user-attachments/assets/5c79b969-fa47-404b-b18d-3999bbb63527)
+
+3. Jalankan juga 'service isc-dhcp-relay restart'
+
+![Screenshot 2024-12-01 054800](https://github.com/user-attachments/assets/3ebdd8aa-927e-4e22-bd91-7f2ac000f780)
+
+![Screenshot 2024-12-01 055549](https://github.com/user-attachments/assets/378d2553-2a5a-448e-8ff9-f8246d1e8477)
+
+![Screenshot 2024-12-01 055657](https://github.com/user-attachments/assets/c3feb97c-7630-4bef-abaa-9f304f2336e6)
+
+4. Coba Restart dan matikan node client lalu hidupkan kembali, lihat apakah DHCP berhasil
+
+![image](https://github.com/user-attachments/assets/5bcee64c-26c5-4886-bec5-4a518fa0884a)
