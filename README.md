@@ -1,4 +1,4 @@
-# Jarkom-Modul-5-IT12-2024
+ # Jarkom-Modul-5-IT12-2024
 
 ## Kelompok IT12
 ### Anggota Kelompok :
@@ -452,6 +452,23 @@ subnet 192.239.0.0 netmask 255.255.255.0 {
 subnet 192.239.1.200 netmask 255.255.255.248 {}
 ```
 
+### HDD
+
+- setup.sh
+
+```
+export DEBIAN_FRONTEND=noninteractive
+apt update
+apt install bind9 netcat -y
+cp ~/named.conf.options /etc/bind/named.conf.options
+
+service bind9 restart
+
+#iptables -P INPUT DROP
+#iptables -A INPUT -s 192.239.1.202 -j ACCEPT
+#NOTES 192.239.1.202 adalah alamat IP dari fairy (DHCP)
+```
+
 ## PENGERJAAN
 
 1. Jalankan 'bash setup.sh' di NewEridu
@@ -513,4 +530,39 @@ iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP
 
 ![image](https://github.com/user-attachments/assets/0f7604fd-1194-4284-890a-e1accb691087)
 
-3.  
+3.  Selain itu, agar kejadian sebelumnya tidak terulang, hanya Fairy yang dapat mengakses HDD. Gunakan nc (netcat) untuk memastikan akses ini. [hapus aturan iptables setelah pengujian selesai agar internet tetap dapat diakses.
+
+- Jalankan 'bash setup.sh' di HDD
+
+![image](https://github.com/user-attachments/assets/e1252a3d-f8c0-4c10-8801-659b07f2e2c2)
+
+- Jalankan command 'iptables -L INPUT -n --line-numbers' gunanya untuk Menampilkan daftar aturan firewall yang sedang aktif di chain INPUT.
+
+![image](https://github.com/user-attachments/assets/36a3011e-73c5-4814-aba6-4389426a086b)
+
+- Jalankan command ini 'iptables -P INPUT DROP' untuk Memblokir semua koneksi yang masuk ke komputer.
+
+![image](https://github.com/user-attachments/assets/5f73bbfc-f619-4de8-a183-69aed49849f0)
+
+- Lalu yang terakhir run 'iptables -A INPUT -s 192.239.1.202 -j ACCEPT' untuk mengizinkan hanya komputer dengan IP 192.239.1.202 (FAIRY) untuk terhubung.
+
+![image](https://github.com/user-attachments/assets/15eeb28f-c11d-48e2-bbdf-5ae9aa7f1422)
+
+![image](https://github.com/user-attachments/assets/57caed6a-5e4c-463f-bfb0-dc2df6f31045)
+
+- Test Ping
+
+ - FAIRY KE HDD ( BISA )
+
+![image](https://github.com/user-attachments/assets/32539d36-6c65-4326-b0ad-dfc24948aa0d)
+
+ - NODE LAIN KE HDD 
+
+![image](https://github.com/user-attachments/assets/0ae3c64b-e5b1-4b7f-887e-b3d9a8037147)
+
+- Test NetCat (untuk memastikan akses FAIRY ke HDD)
+
+- FAIRY KE HDD
+
+
+4.  
