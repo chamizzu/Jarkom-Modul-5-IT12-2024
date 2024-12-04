@@ -563,6 +563,12 @@ iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP
 - Test NetCat (untuk memastikan akses FAIRY ke HDD)
 
 - FAIRY KE HDD
+untuk testing dengan netcat, pastikan membuka port yang akan digunakan di HDD jangan lupa untuk restart HDD dan install netcat dulu apt-get update dan apt-get install netcat kemudian lakukan blok kayak diatas dan testing netcat dengan command di HDD: nc -l -p 3030
 
+- testing pada fairy dengan command  : echo "bisa dari fairy" |nc 192.239.1.203 3030
+
+![image](https://github.com/user-attachments/assets/8f267f33-b713-4723-9218-97455258789c)
+
+![image](https://github.com/user-attachments/assets/8c3f6d6f-1bf2-408f-844c-c3b4da7dd308)
 
 4.  
